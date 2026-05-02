@@ -152,3 +152,20 @@ Podes começar a executar o Passo 6.
 
 **Result:**
 A IA configurou transições de navegação com `AnimatedContent` na `MainActivity` (com efeitos de *slide* e *fade* ao trocar entre ecrãs).Aplicou o modificador `.animateItem()` para que, quando as imagens carregam ou são atualizadas, elas aparecem na interface de forma dinâmica. O botão de *refresh* foi substituído por um interrutor de **Dark Mode** manual que troca o estado geral da app na hora, e a atualização das imagens é agora controlada por um *Push-to-Refresh*
+
+## Prompt 10 (Navegação Pager e Detalhes de Favoritos)
+
+**Goal:**
+Adicionar mais funcionalidades com o uso da navegação nativa por gestos de "swipe" entre a página inicial e os favoritos, e uma nova janela de detalhes para os animais guardados nos favoritos
+
+**Prompt used**:
+Lê todos os ficheiros Markdown na pasta docs/ para ganhares contexto sobre a arquitetura (MVVM multi-módulo), os modelos de dados e as features exclusivas desta aplicação.
+
+Quero agora adicionar duas funcionalidades adicionais:
+
+-Quero que haja uma segunda forma de ir para a vista do hall of fame. Em que ao dar swipe left na pagina inicial navega se para o hall of fame e ao estar no hall of fame e dar swipe right navega se para a pagina principal com animações. Se possivel tira proveito das funcionalidades do Jetpack Compose.
+
+-Quero que, no hall of fame, ao clicar num animal que esteja lá que apareça uma nova janela que mostra mais informações sobre aquele animal incluindo o valor de derp que o user escolheu. Não te esqueças que a janela tambem suporta o darkmode. Esta janela tambem pode ser fechada ao dar swipe down
+
+**Result:**
+A IA substituiu a transição estática `AnimatedContent` pelo `HorizontalPager` do Compose. Foi também criado o `FavoriteDetailsDialog` — uma nova janela arindo para exibir detalhes e a foto em plano grande ao clicar num dos animais do Hall of Fame.
