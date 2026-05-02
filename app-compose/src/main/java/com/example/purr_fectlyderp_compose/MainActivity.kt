@@ -29,11 +29,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.example.purr_fectlyderp_compose.ui.screens.DerpGridScreen
 import com.example.purr_fectlyderp_compose.ui.screens.FavoritesScreen
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
 enum class Screen {
     Grid,
     Favorites
 }
+
+
 
 class MainActivity : ComponentActivity() {
     
@@ -55,34 +61,30 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var currentScreen by remember { mutableStateOf(Screen.Grid) }
+                    val pagerState = rememberPagerState(pageCount = { 2 })
+                    val coroutineScope = rememberCoroutineScope()
 
-                    AnimatedContent(
-                        targetState = currentScreen,
-                        transitionSpec = {
-                            if (targetState == Screen.Favorites) {
-                                slideInHorizontally(animationSpec = tween(400), initialOffsetX = { fullWidth -> fullWidth }) + fadeIn() togetherWith
-                                slideOutHorizontally(animationSpec = tween(400), targetOffsetX = { fullWidth -> -fullWidth }) + fadeOut()
-                            } else {
-                                slideInHorizontally(animationSpec = tween(400), initialOffsetX = { fullWidth -> -fullWidth }) + fadeIn() togetherWith
-                                slideOutHorizontally(animationSpec = tween(400), targetOffsetX = { fullWidth -> fullWidth }) + fadeOut()
-                            }
-                        },
-                        label = "ScreenTransition"
-                    ) { targetScreen ->
-                        when (targetScreen) {
-                            Screen.Grid -> {
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier.fillMaxSize()
+                    ) { page ->
+                        when (page) {
+                            0 -> {
                                 DerpGridScreen(
                                     viewModel = mainViewModel,
-                                    onNavigateToFavorites = { currentScreen = Screen.Favorites },
+                                    onNavigateToFavorites = { 
+                                        coroutineScope.launch { pagerState.animateScrollToPage(1) } 
+                                    },
                                     isDarkTheme = isDarkTheme,
                                     onToggleTheme = { isDarkTheme = !isDarkTheme }
                                 )
                             }
-                            Screen.Favorites -> {
+                            1 -> {
                                 FavoritesScreen(
                                     viewModel = favoritesViewModel,
-                                    onNavigateBack = { currentScreen = Screen.Grid }
+                                    onNavigateBack = { 
+                                        coroutineScope.launch { pagerState.animateScrollToPage(0) } 
+                                    }
                                 )
                             }
                         }

@@ -1,5 +1,9 @@
 package com.example.purr_fectlyderp_compose.ui.screens
 
+import androidx.compose.foundation.clickable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,10 +26,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.purr_fectlyderp.data.FavoriteDerp
 import com.example.purr_fectlyderp_compose.viewmodel.FavoritesViewModel
-import com.example.purr_fectlyderp_compose.ui.theme.BgGradientStart
-import com.example.purr_fectlyderp_compose.ui.theme.BgGradientEnd
-import com.example.purr_fectlyderp_compose.ui.theme.ColorPrimaryTitle
-import com.example.purr_fectlyderp_compose.ui.theme.ColorDerpText
 
 @Composable
 fun FavoritesScreen(
@@ -34,6 +34,8 @@ fun FavoritesScreen(
 ) {
     val favorites by viewModel.favorites.collectAsState()
     
+    var selectedFavorite by remember { mutableStateOf<FavoriteDerp?>(null) }
+
     val backgroundBrush = Brush.verticalGradient(
         colors = listOf(
             MaterialTheme.colorScheme.background,
@@ -92,19 +94,27 @@ fun FavoritesScreen(
                                 fadeInSpec = null,
                                 fadeOutSpec = null,
                                 placementSpec = androidx.compose.animation.core.tween(300)
-                            )
+                            ),
+                            onClick = { selectedFavorite = favorite }
                         )
                     }
                 }
             }
         }
     }
+
+    selectedFavorite?.let { fav ->
+        FavoriteDetailsDialog(
+            favorite = fav,
+            onDismiss = { selectedFavorite = null }
+        )
+    }
 }
 
 @Composable
-fun FavoriteItem(favorite: FavoriteDerp, modifier: Modifier = Modifier) {
+fun FavoriteItem(favorite: FavoriteDerp, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
