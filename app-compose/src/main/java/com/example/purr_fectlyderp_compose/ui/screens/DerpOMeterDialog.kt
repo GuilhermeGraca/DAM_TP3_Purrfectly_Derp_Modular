@@ -76,8 +76,9 @@ fun DerpOMeterDialog(
                 steps = 100,
                 modifier = Modifier.padding(vertical = 8.dp),
                 colors = SliderDefaults.colors(
-                    thumbColor = MaterialTheme.colorScheme.primary,
-                    activeTrackColor = MaterialTheme.colorScheme.primary
+                    thumbColor = com.example.purr_fectlyderp_compose.ui.theme.ColorSliderActive,
+                    activeTrackColor = com.example.purr_fectlyderp_compose.ui.theme.ColorSliderActive,
+                    inactiveTrackColor = com.example.purr_fectlyderp_compose.ui.theme.ColorSliderInactive
                 )
             )
 
@@ -89,9 +90,12 @@ fun DerpOMeterDialog(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = com.example.purr_fectlyderp_compose.ui.theme.ColorButtonBg,
+                    contentColor = com.example.purr_fectlyderp_compose.ui.theme.ColorButtonText
+                )
             ) {
-                Text(text = "Adicionar ao Hall of Fame", color = MaterialTheme.colorScheme.onPrimary)
+                Text(text = "Adicionar ao Hall of Fame")
             }
         }
     }

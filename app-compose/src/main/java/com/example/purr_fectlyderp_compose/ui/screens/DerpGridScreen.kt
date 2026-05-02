@@ -1,5 +1,6 @@
 package com.example.purr_fectlyderp_compose.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -14,11 +15,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.purr_fectlyderp.model.UnsplashImage
 import com.example.purr_fectlyderp_compose.viewmodel.MainViewModel
+import com.example.purr_fectlyderp_compose.ui.theme.BgGradientStart
+import com.example.purr_fectlyderp_compose.ui.theme.BgGradientEnd
+import com.example.purr_fectlyderp_compose.ui.theme.ColorPrimaryTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,69 +39,93 @@ fun DerpGridScreen(
 
     var selectedImage by remember { mutableStateOf<UnsplashImage?>(null) }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Purr-fectly Derp") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                    actionIconContentColor = MaterialTheme.colorScheme.onPrimary
-                ),
-                actions = {
-                    IconButton(onClick = onNavigateToFavorites) {
-                        Icon(Icons.Default.Favorite, contentDescription = "Favoritos")
-                    }
+    val backgroundBrush = Brush.verticalGradient(
+        colors = listOf(BgGradientStart, BgGradientEnd)
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(backgroundBrush)
+    ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            // Header Customizado igual ao XML
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 24.dp, bottom = 16.dp, start = 24.dp, end = 24.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Friendly Purr-fectly\nDerp Gallery",
+                    color = ColorPrimaryTitle,
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold,
+                    lineHeight = 32.sp
+                )
+                
+                Row {
                     IconButton(onClick = { viewModel.fetchDerpImages() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "Refresh")
+                        Icon(
+                            Icons.Default.Refresh, 
+                            contentDescription = "Refresh",
+                            tint = ColorPrimaryTitle
+                        )
+                    }
+                    IconButton(onClick = onNavigateToFavorites) {
+                        Icon(
+                            Icons.Default.Favorite, 
+                            contentDescription = "Hall of fame",
+                            tint = ColorPrimaryTitle,
+                            modifier = Modifier.size(32.dp)
+                        )
                     }
                 }
-            )
-        }
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
-            if (images.isNotEmpty()) {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    items(images, key = { it.id }) { image ->
-                        DerpGridItem(image = image) {
-                            selectedImage = image
+            }
+
+            // Grelha de imagens
+            Box(modifier = Modifier.weight(1f)) {
+                if (images.isNotEmpty()) {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(images, key = { it.id }) { image ->
+                            DerpGridItem(image = image) {
+                                selectedImage = image
+                            }
                         }
                     }
-                }
-            } else if (!isLoading && errorMessage == null) {
-                Text(
-                    text = "Nenhuma imagem encontrada.",
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-
-            if (isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center),
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            errorMessage?.let { msg ->
-                if (images.isEmpty()) {
-                    Column(
+                } else if (!isLoading && errorMessage == null) {
+                    Text(
+                        text = "Nenhuma imagem encontrada.",
                         modifier = Modifier.align(Alignment.Center),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(text = msg, color = MaterialTheme.colorScheme.error)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Button(onClick = { viewModel.fetchDerpImages() }) {
-                            Text("Tentar Novamente")
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center),
+                        color = ColorPrimaryTitle
+                    )
+                }
+
+                errorMessage?.let { msg ->
+                    if (images.isEmpty()) {
+                        Column(
+                            modifier = Modifier.align(Alignment.Center),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(text = msg, color = MaterialTheme.colorScheme.error)
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Button(onClick = { viewModel.fetchDerpImages() }) {
+                                Text("Tentar Novamente")
+                            }
                         }
                     }
                 }

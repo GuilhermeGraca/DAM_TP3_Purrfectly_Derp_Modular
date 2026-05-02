@@ -18,16 +18,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-// Mantém as cores do XML original para consistência visual no modo Claro
-val PrimaryColor = Color(0xFFFFB7B2) // pink_light
-val SecondaryColor = Color(0xFFFF9AA2) // pink_dark
-val BackgroundColor = Color(0xFFFFF5F5) // app_background
-val TextPrimary = Color(0xFF4A4A4A) // text_primary
+// Cores exatas do XML original para consistência visual no modo Claro
+val BgGradientStart = Color(0xFFEBE5D2)
+val BgGradientEnd = Color(0xFFD4C8E0)
+val ColorPrimaryTitle = Color(0xFFD29662)
+val ColorCardTitle = Color(0xFF49311C)
+val ColorDerpText = Color(0xFFCC9D75)
+val ColorSliderActive = Color(0xFFA18BC9)
+val ColorSliderInactive = Color(0xFFDDD2F3)
+val ColorButtonBg = Color(0xFFDB9059)
+val ColorButtonText = Color(0xFF49311C)
 
 private val DarkColorScheme = darkColorScheme(
-    primary = SecondaryColor,
-    secondary = PrimaryColor,
-    tertiary = PrimaryColor,
+    primary = ColorPrimaryTitle,
+    secondary = ColorSliderActive,
+    tertiary = ColorButtonBg,
     background = Color(0xFF1E1E1E),
     surface = Color(0xFF2C2C2C),
     onPrimary = Color.Black,
@@ -37,15 +42,15 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryColor,
-    secondary = SecondaryColor,
-    tertiary = PrimaryColor,
-    background = BackgroundColor,
+    primary = ColorPrimaryTitle,
+    secondary = ColorSliderActive,
+    tertiary = ColorButtonBg,
+    background = BgGradientStart, // Base background, mas usaremos Brush no Compose
     surface = Color.White,
     onPrimary = Color.White,
-    onSecondary = Color.White,
-    onBackground = TextPrimary,
-    onSurface = TextPrimary
+    onSecondary = ColorCardTitle,
+    onBackground = ColorCardTitle,
+    onSurface = ColorCardTitle
 )
 
 tailrec fun Context.findActivity(): Activity? = when (this) {

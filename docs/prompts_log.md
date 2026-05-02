@@ -121,4 +121,15 @@ Estou a tentar compilar a app para o modulo `app-compose` pelo Android Studio, n
 Analisa as tuas alterações nos ultimos passos implementados para o modulo `app-compose` de modo a descobrir a origem deste problema e corrige o erro que está a causar esta falha na inicialização da app. Não te esqueças de verificar as depencias do gradle e os manifests.
 
 **Result:**
-A IA correu o comando `adb logcat` e viu um `ClassNotFoundException` diretamente do emulador. O problema era que basicamente quando a app tentava abrir, o sistema ia procurar pela `MainActivity` no pacote errado e "crashava" instantaneamente. Ao corrigir o `namespace` no Gradle, a app já corre sem erros
+A IA correu o comando `adb logcat` e viu um `ClassNotFoundException` diretamente do emulador. O problema era que basicamente quando a app tentava abrir, o sistema ia procurar pela `MainActivity` no pacote errado e "crashava" instantaneamente. Ao corrigir o `namespace` no Gradle, a app já corre sem erros.
+
+## Prompt 8 (Ajustes Visuais)
+
+**Goal:**
+Replicar fielmente as cores e layouts do XML Views original no módulo de Compose.
+
+**Prompt used**:
+Quero que anilizes melhor o visual da app no XML views e quero que o repliques melhor no Compose. Toma expecial atenção nas cores.
+
+**Result:**
+A IA analisou o ficheiro `colors.xml` e `activity_main.xml` do projeto antigo, copiou os códigos hexadecimais exatos e aplicou-os no `Theme.kt`. Removeu os componentes padrão do Material Design e recriou o fundo em gradiente e o layout do header.
