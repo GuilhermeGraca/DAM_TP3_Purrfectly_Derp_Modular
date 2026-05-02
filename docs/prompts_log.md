@@ -49,3 +49,23 @@ Podes começar a executar o Passo 3
 
 **Result:**
 A IA verificou que as dependências já tinham sido definidas e validou que o módulo `:app-xml` importa tudo bem do `:core`. O projeto compila e funciona sem erros.
+
+## Prompt 4 (Módulo Compose)
+
+**Goal:**
+Configurar o módulo `:app-compose` vazio preparado para Jetpack Compose e ligado ao módulo partilhado `:core`.
+
+**Prompt used**:
+Lê todos os ficheiros Markdown na pasta docs/ para ganhares contexto sobre a arquitetura (MVVM multi-módulo), os modelos de dados e as features exclusivas desta aplicação.
+
+O teu objetivo agora é focar-te no docs/08_implementation_plan.md e implementar exclusivamente o Passo 4.
+
+Regras:
+
+- Não avances para o passo seguinte sem a minha autorização.
+- Se precisares de mover ficheiros entre módulos, certifica-te de que as dependências no build.gradle.kts e os imports ficam corretos.
+
+Podes começar a executar o Passo 4
+
+**Result:**
+A IA converteu o módulo `:app-compose` de Library para Application, adicionou o plugin do Compose Compiler, configurou o BuildFeatures para Compose e adicionou todas as bibliotecas de UI e Material 3 no `build.gradle.kts`. Criou o `AndroidManifest.xml` base para a nova app

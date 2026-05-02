@@ -35,7 +35,7 @@ Para promover a reutilização de código e separação de responsabilidades, o 
     - Repository layer (caching e Room database).
     - Casos de Uso / Business Logic.
 
-* **:app-xml` (Legacy App)**
+* **:app-xml (Legacy App)**
     - Utiliza o módulo :core.
     - Interface tradicional construída com XML Layouts, Activities e Fragments.
 
