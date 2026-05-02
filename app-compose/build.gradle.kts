@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.app_compose"
+    namespace = "com.example.purr_fectlyderp_compose"
     compileSdk {
         version = release(36)
     }
@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
+    implementation("io.coil-kt:coil-compose:2.6.0")
     
     debugImplementation(libs.androidx.ui.tooling)
 }

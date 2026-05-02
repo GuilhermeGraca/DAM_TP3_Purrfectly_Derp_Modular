@@ -88,4 +88,37 @@ Regras:
 Podes começar a executar o Passo 5
 
 **Result:**
-A IA criou a `MainActivity` base em Compose e o sistema de "Dynamic Theming" que herda as cores originais da App XML mas agora suporta cores dinâmicas. Foram recriados os `MainViewModel` e `FavoritesViewModel` adaptou a base de dados e a API para usarem `StateFlow`
+A IA criou a `MainActivity` base em Compose e o sistema de "Dynamic Theming" que herda as cores originais da App XML mas agora suporta cores dinâmicas. Foram recriados os `MainViewModel` e `FavoritesViewModel` adaptando a base de dados e a API para usarem `StateFlow`.
+
+## Prompt 6 (Passo 5 - Ecrãs Visuais)
+
+**Goal:**
+Criar os Ecrãs Visuais no `app-compose`.
+
+**Prompt used**:
+Lê todos os ficheiros Markdown na pasta docs/ para ganhares contexto sobre a arquitetura (MVVM multi-módulo), os modelos de dados e as features exclusivas desta aplicação.
+
+O teu objetivo agora é focar-te no docs/08_implementation_plan.md e implementar exclusivamente a continuação do passo 5 - criação de ecras visuais.
+
+Regras:
+
+- Não avances para o passo seguinte sem a minha autorização.
+- Se precisares de mover ficheiros entre módulos, certifica-te de que as dependências no build.gradle.kts e os imports ficam corretos.
+
+Podes começar continuação do passo 5 - criação de ecras visuais.
+
+**Result:**
+A IA instalou a biblioteca `coil-compose` para carregar de forma assíncrona as imagens e construiu os 3 ecrãs visuais principais - Derp Grid Screen, Favorites Screen e Derp-o-Meter. Ligou a navegação base destes ecrãs na `MainActivity`.
+
+## Prompt 7 (Correção de Erro de inicialização do app-compose)
+
+**Goal:**
+Corrigir o problema que impedia a inicialização do `app-compose`.
+
+**Prompt used**:
+Estou a tentar compilar a app para o modulo `app-compose` pelo Android Studio, no entanto a app ao tentar inciar falha e volta a fechar antes de mostrar qualquer ecra. No telemovel é mostrado uma mensagem de alerta a dizer: "Purrfectly Derp keeps stopping".
+
+Analisa as tuas alterações nos ultimos passos implementados para o modulo `app-compose` de modo a descobrir a origem deste problema e corrige o erro que está a causar esta falha na inicialização da app. Não te esqueças de verificar as depencias do gradle e os manifests.
+
+**Result:**
+A IA correu o comando `adb logcat` e viu um `ClassNotFoundException` diretamente do emulador. O problema era que basicamente quando a app tentava abrir, o sistema ia procurar pela `MainActivity` no pacote errado e "crashava" instantaneamente. Ao corrigir o `namespace` no Gradle, a app já corre sem erros

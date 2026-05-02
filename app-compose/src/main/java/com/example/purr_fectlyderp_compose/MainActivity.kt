@@ -2,6 +2,7 @@ package com.example.purr_fectlyderp_compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,29 +15,53 @@ import com.example.purr_fectlyderp_compose.ui.theme.PurrfectlyDerpTheme
 import com.example.purr_fectlyderp_compose.viewmodel.FavoritesViewModel
 import com.example.purr_fectlyderp_compose.viewmodel.MainViewModel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.example.purr_fectlyderp_compose.ui.screens.DerpGridScreen
+import com.example.purr_fectlyderp_compose.ui.screens.FavoritesScreen
+
+enum class Screen {
+    Grid,
+    Favorites
+}
+
 class MainActivity : ComponentActivity() {
     
-    // ViewModels instanciados tal como na app XML, mas preparados com StateFlow
-    private val mainViewModel: MainViewModel by viewModels()
-    private val favoritesViewModel: FavoritesViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels {
+        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+    }
+    private val favoritesViewModel: FavoritesViewModel by viewModels {
+        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             PurrfectlyDerpTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PlaceholderScreen()
+                    var currentScreen by remember { mutableStateOf(Screen.Grid) }
+
+                    when (currentScreen) {
+                        Screen.Grid -> {
+                            DerpGridScreen(
+                                viewModel = mainViewModel,
+                                onNavigateToFavorites = { currentScreen = Screen.Favorites }
+                            )
+                        }
+                        Screen.Favorites -> {
+                            FavoritesScreen(
+                                viewModel = favoritesViewModel,
+                                onNavigateBack = { currentScreen = Screen.Grid }
+                            )
+                        }
+                    }
                 }
             }
         }
     }
-}
-
-@Composable
-fun PlaceholderScreen() {
-    Text(text = "Hello Compose! A arquitetura base está montada.")
 }
