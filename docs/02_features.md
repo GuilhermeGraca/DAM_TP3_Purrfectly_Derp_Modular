@@ -21,3 +21,6 @@ Abaixo estão as funcionalidades principais da app "Purr-fectly Derp", garante o
 9. Tratamento de Erros - Gestão de falhas de rede ou erros de API, apresentando mensagens de erro amigáveis ao utilizador ou ao recorrer aos dados da cache local
 
 10. Arquitetura MVVM - Separação estrutural clara com o uso do padrão *Model-View-ViewModel*
+
+11. Features Exclusivas do módulo `app-compose`
+O módulo `:app-compose` tira proveito de animações e transições declarativas que melhoram a experiência do utilizador nas interações entre ecrãs, além de suportar de forma totalmente imersiva o Dynamic Theming. Para garantir consistência visual, o **Modo Claro (Light Mode) no Compose mantém as mesmas cores utilizadas nas XML Views**. Adicionalmente, foi incluída a capacidade de **alternar para o Modo Escuro (Dark Mode) manualmente através de um botão** na interface.

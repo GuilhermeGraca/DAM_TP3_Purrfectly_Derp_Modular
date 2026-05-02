@@ -20,4 +20,4 @@ Para garantir uma boa User Experience:
 ## Arquitetura Modular (MIP-3)
 A aplicação evoluiu para uma arquitetura multi-módulo que partilha a lógica de negócio e dados (`:core`), sendo consumida por duas interfaces distintas:
 - **XML UI (`:app-xml`)**: Interface legacy usando Views e XML.
-- **Compose UI (`:app-compose`)**: Interface moderna utilizando Jetpack Compose. A versão Compose inclui também uma feature exclusiva: um painel de estatísticas interativo com gráficos (ou animações avançadas) para o nível de Derp, tirando partido das capacidades declarativas do Compose.
+- **Compose UI (`:app-compose`)**: Interface moderna que usa Jetpack Compose. A versão Compose inclui funcionalidades exclusivas: **animações fluidas e transições dinâmicas** entre os ecrãs e um sistema nativo de **Dynamic Theming** (onde o Light Mode usa as mesmas cores do XML e o Dark Mode pode ser ativado através de um botão), tira assim partido das capacidades visuais e declarativas do Compose.

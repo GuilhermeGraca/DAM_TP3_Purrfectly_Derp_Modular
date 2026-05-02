@@ -1,12 +1,23 @@
-# Prompts Log - MIP-3
-
-## Prompt 1 (Reestruturação Inicial)
+## Prompt 1 (Passo 1)
 
 **Goal:**
-Reestruturar o projeto Android atual para a nova arquitetura multi-módulo pedida no MIP-3, começando pelo isolamento da aplicação antiga (legacy).
+Reestruturar o projeto Android antigo para a nova arquitetura multi-módulo pedida no MIP-3
 
 **Prompt used:**
-Inicia a reestruturação deste projeto para a versão modular. Para começar, altera a pasta da aplicação atual para o módulo `app-xml` e atualiza as configurações do Gradle para que este módulo funcione corretamente sem sobrescrever a aplicação antiga. Atualiza também a documentação necessária para refletir estas novas alterações.
+Quero que faças uma refatorização deste projeto para a versão modular. Para começar, altera a pasta da aplicação atual para o módulo `app-xml` e atualiza as configurações do Gradle para que este módulo funcione corretamente sem sobrescrever a aplicação antiga
 
 **Result:**
-A pasta principal `app` foi renomeada com sucesso para `app-xml`. O ficheiro `settings.gradle.kts` foi atualizado para referenciar o novo módulo e o `applicationId` foi ajustado no Gradle para não conflituar com instalações antigas. A documentação do projeto foi adaptada para o novo formato multi-módulo. Tudo pronto para começar a extração do código para o módulo `:core`.
+A Ia conseguiu fazer a refatorização do projeto para a versão modular. Criou o modulo pedido e moveu o codigo da app antiga para ele. Ele tambem fez as alterações necessárias nos ficheiros Gradle para que este módulo funcione corretamente sem sobrescrever a aplicação antiga
+
+## Prompt 2
+
+**Goal:**
+
+**Prompt used:**
+
+**Result:**
+
+
+
+
+

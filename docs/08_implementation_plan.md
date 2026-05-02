@@ -1,7 +1,7 @@
 # 08 Plano de Implementação
 
 **Passo 1 (Refactoring Inicial)**
-Renomear a app original para `app-xml`. Ajustar configurações de Git e o `applicationId` para evitar sobreposição de apps antigas.
+Renomear a app original para `app-xml`.
 
 **Passo 2 (Módulo Core)**
 Criar o módulo de biblioteca Android `:core`. Mover todas as classes de modelo, base de dados (Room), DAOs e Repositório do módulo `:app-xml` para o `:core`.
@@ -16,4 +16,4 @@ Criar um novo módulo Android `:app-compose` vazio configurado com Jetpack Compo
 Reconstruir a interface do utilizador de forma declarativa usando composables. Criar os ViewModels usando State e fluxos reativos adequados para o Compose.
 
 **Passo 6 (Feature Exclusiva Compose)**
-Adicionar ao módulo `:app-compose` uma funcionalidade exclusiva (ex: Animações de swipe, ou Dashboard de estatísticas de Derp) para diferenciar tecnicamente as duas implementações.
+Adicionar ao módulo `:app-compose` as funcionalidades exclusivas: implementação nativa de **Animações e Transições** fluidas entre elementos e ecrãs, além da implementação do **Dynamic Theming (Light/Dark Mode com suporte a Material You)**. Estas features vão diferenciar tecnicamente o módulo declarativo em relação ao módulo clássico em XML.

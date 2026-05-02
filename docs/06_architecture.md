@@ -29,17 +29,17 @@ View/UI → ViewModel → Repository → API Service/Model
 ## Estrutura Multi-Módulo (MIP-3)
 Para promover a reutilização de código e separação de responsabilidades, o projeto encontra-se dividido em 3 módulos principais:
 
-* **`:core` (Shared Module)**
+* **:core (Shared Module)**
     - Contém os Data Models (data classes).
     - API Client (Retrofit/Ktor).
     - Repository layer (caching e Room database).
     - Casos de Uso / Business Logic.
 
-* **`:app-xml` (Legacy App)**
-    - Consome o módulo `:core`.
+* **:app-xml` (Legacy App)**
+    - Utiliza o módulo :core.
     - Interface tradicional construída com XML Layouts, Activities e Fragments.
 
-* **`:app-compose` (Modern App)**
-    - Consome o módulo `:core`.
-    - Interface moderna baseada em Jetpack Compose.
+* **:app-compose (Modern App)**
+    - Utiliza o módulo :core.
+    - Interface baseada em Jetpack Compose.
     - Implementa UI declarativa e partilha a mesma lógica de negócio.
