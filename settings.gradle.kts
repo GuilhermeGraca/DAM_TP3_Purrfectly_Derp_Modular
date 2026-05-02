@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Purr-fectly Derp Modular"
 include(":app-xml")
+include(":core")
+include(":app-compose")
