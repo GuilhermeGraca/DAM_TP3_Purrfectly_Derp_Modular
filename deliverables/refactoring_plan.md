@@ -1,4 +1,4 @@
-# Plano de Refatorização (Refactoring Plan)
+# Refactoring Plan
 
 Os passos executados para extrair a lógica e criar a nova arquitetura partilhada foram:
 

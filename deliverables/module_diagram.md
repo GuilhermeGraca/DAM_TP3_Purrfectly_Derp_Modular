@@ -1,4 +1,4 @@
-# Diagrama de Módulos (Module Diagram)
+# Module Diagram
 
 O projeto "Purrfectly Derp" está dividido em 3 módulos principais independentes:
 
