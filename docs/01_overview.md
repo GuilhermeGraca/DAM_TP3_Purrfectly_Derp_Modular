@@ -16,3 +16,8 @@ Esta avaliação é integrada no modelo de dados da aplicação e persistida com
 Para garantir uma boa User Experience:
 * **Favoritos (Hall of Fame):** Os utilizadores podem guardar as suas 5 fotografias de animais favoritas. O sistema utiliza uma gestão de fila FIFO (First-In, First-Out)  — ao adicionar uma 6ª imagem, o favorito mais antigo é automaticamente removido.
 * **Cache Offline Inteligente:** A aplicação mantém uma cache local (Room Database) de até 50 itens (excluindo os favoritos). O algoritmo da cache monitoriza a navegação do utilizador, asegura que imagens recentes e futuras estejam disponíveis mesmo sem ligação à Internet.
+
+## Arquitetura Modular (MIP-3)
+A aplicação evoluiu para uma arquitetura multi-módulo que partilha a lógica de negócio e dados (`:core`), sendo consumida por duas interfaces distintas:
+- **XML UI (`:app-xml`)**: Interface legacy usando Views e XML.
+- **Compose UI (`:app-compose`)**: Interface moderna utilizando Jetpack Compose. A versão Compose inclui também uma feature exclusiva: um painel de estatísticas interativo com gráficos (ou animações avançadas) para o nível de Derp, tirando partido das capacidades declarativas do Compose.

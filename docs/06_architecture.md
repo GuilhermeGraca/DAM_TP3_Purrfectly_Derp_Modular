@@ -25,3 +25,21 @@ View/UI → ViewModel → Repository → API Service/Model
 * Model
     - Online: API Unsplash de onde vêm as fotos novas
     - Local: Room Database que guarda os 5 favoritos (FIFO) e a cache de 50 items
+
+## Estrutura Multi-Módulo (MIP-3)
+Para promover a reutilização de código e separação de responsabilidades, o projeto encontra-se dividido em 3 módulos principais:
+
+* **`:core` (Shared Module)**
+    - Contém os Data Models (data classes).
+    - API Client (Retrofit/Ktor).
+    - Repository layer (caching e Room database).
+    - Casos de Uso / Business Logic.
+
+* **`:app-xml` (Legacy App)**
+    - Consome o módulo `:core`.
+    - Interface tradicional construída com XML Layouts, Activities e Fragments.
+
+* **`:app-compose` (Modern App)**
+    - Consome o módulo `:core`.
+    - Interface moderna baseada em Jetpack Compose.
+    - Implementa UI declarativa e partilha a mesma lógica de negócio.
