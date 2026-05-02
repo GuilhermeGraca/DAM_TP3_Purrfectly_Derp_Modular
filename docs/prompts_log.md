@@ -28,3 +28,24 @@ Podes começar a executar o Passo 2
 
 **Result:**
 A IA moveu as pastas de API, Base de dados, Repositórios e Modelos do módulo antigo para o novo módulo `:core`. Configurou as dependências necessárias no build.gradle.kts do `:core` e ligou este módulo à aplicação antiga.
+
+## Prompt 3
+
+**Goal:**
+Garantir que a aplicação antiga `:app-xml` usa bem o módulo partilhado `:core`.
+
+**Prompt used**:
+Lê todos os ficheiros Markdown na pasta docs/ para ganhares contexto sobre a arquitetura (MVVM multi-módulo), os modelos de dados e as features exclusivas desta aplicação.
+
+Quero agora que te foques no docs/08_implementation_plan.md e implementar exclusivamente o Passo 3.
+
+Regras:
+
+- Não avances para o passo seguinte sem a minha autorização.
+- Se precisares de mover ficheiros entre módulos, certifica-te de que as dependências no build.gradle.kts e os imports ficam corretos.
+
+Podes começar a executar o Passo 3
+
+
+**Result:**
+A IA verificou que as dependências já tinham sido definidas e validou que o módulo `:app-xml` importa tudo bem do `:core`. O projeto compila e funciona sem erros.
