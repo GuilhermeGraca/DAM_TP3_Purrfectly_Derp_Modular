@@ -12,12 +12,19 @@ A Ia conseguiu fazer a refatorização do projeto para a versão modular. Criou 
 ## Prompt 2
 
 **Goal:**
+Configurar o módulo de biblioteca `:core`. Mover a lógica de base de dados e de acesso à API para separar as responsabilidades do projeto.
 
 **Prompt used:**
+Lê todos os ficheiros Markdown na pasta docs/ para ganhares contexto sobre a arquitetura (MVVM multi-módulo), os modelos de dados e as features exclusivas desta aplicação.
+
+Quero agora que te foques no docs/08_implementation_plan.md e implementar exclusivamente o Passo 2.
+
+Regras:
+
+- Não avances para o passo seguinte sem a minha autorização.
+- Se precisares de mover ficheiros entre módulos, certifica-te de que as dependências no build.gradle.kts e os imports ficam corretos.
+
+Podes começar a executar o Passo 2
 
 **Result:**
-
-
-
-
-
+A IA moveu as pastas de API, Base de dados, Repositórios e Modelos do módulo antigo para o novo módulo `:core`. Configurou as dependências necessárias no build.gradle.kts do `:core` e ligou este módulo à aplicação antiga.
