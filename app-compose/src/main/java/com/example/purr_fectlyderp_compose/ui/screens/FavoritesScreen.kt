@@ -35,7 +35,10 @@ fun FavoritesScreen(
     val favorites by viewModel.favorites.collectAsState()
     
     val backgroundBrush = Brush.verticalGradient(
-        colors = listOf(BgGradientStart, BgGradientEnd)
+        colors = listOf(
+            MaterialTheme.colorScheme.background,
+            MaterialTheme.colorScheme.surfaceVariant
+        )
     )
 
     Box(
@@ -54,12 +57,12 @@ fun FavoritesScreen(
                     Icon(
                         Icons.Default.ArrowBack, 
                         contentDescription = "Voltar",
-                        tint = ColorPrimaryTitle
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
                 Text(
                     text = "Hall of Fame",
-                    color = ColorPrimaryTitle,
+                    color = MaterialTheme.colorScheme.primary,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 8.dp)
@@ -83,7 +86,14 @@ fun FavoritesScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(favorites, key = { it.id }) { favorite ->
-                        FavoriteItem(favorite = favorite)
+                        FavoriteItem(
+                            favorite = favorite,
+                            modifier = Modifier.animateItem(
+                                fadeInSpec = null,
+                                fadeOutSpec = null,
+                                placementSpec = androidx.compose.animation.core.tween(300)
+                            )
+                        )
                     }
                 }
             }
@@ -92,9 +102,9 @@ fun FavoritesScreen(
 }
 
 @Composable
-fun FavoriteItem(favorite: FavoriteDerp) {
+fun FavoriteItem(favorite: FavoriteDerp, modifier: Modifier = Modifier) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -112,8 +122,7 @@ fun FavoriteItem(favorite: FavoriteDerp) {
                 Text(
                     text = "Nível de Derp: ${favorite.derpLevel}%",
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = ColorPrimaryTitle
+                    color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
@@ -126,7 +135,7 @@ fun FavoriteItem(favorite: FavoriteDerp) {
                     Text(
                         text = it,
                         style = MaterialTheme.typography.bodySmall,
-                        color = ColorDerpText
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }

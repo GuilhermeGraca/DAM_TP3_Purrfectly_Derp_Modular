@@ -131,5 +131,24 @@ Replicar fielmente as cores e layouts do XML Views original no módulo de Compos
 **Prompt used**:
 Quero que anilizes melhor o visual da app no XML views e quero que o repliques melhor no Compose. Toma expecial atenção nas cores.
 
-**Result:**
 A IA analisou o ficheiro `colors.xml` e `activity_main.xml` do projeto antigo, copiou os códigos hexadecimais exatos e aplicou-os no `Theme.kt`. Removeu os componentes padrão do Material Design e recriou o fundo em gradiente e o layout do header.
+
+## Prompt 9 (Passo 6 - Animações e Transições)
+
+**Goal:**
+Adicionar as funcionalidades exclusivas e nativas de Animações do Compose ao módulo `:app-compose`.
+
+**Prompt used**:
+Lê todos os ficheiros Markdown na pasta docs/ para ganhares contexto sobre a arquitetura (MVVM multi-módulo), os modelos de dados e as features exclusivas desta aplicação.
+
+O teu objetivo agora é focar-te no docs/08_implementation_plan.md e implementar exclusivamente o Passo 6.
+
+Regras:
+
+- Não avances para o passo seguinte sem a minha autorização.
+- Se precisares de mover ficheiros entre módulos, certifica-te de que as dependências no build.gradle.kts e os imports ficam corretos.
+
+Podes começar a executar o Passo 6.
+
+**Result:**
+A IA configurou transições de navegação com `AnimatedContent` na `MainActivity` (com efeitos de *slide* e *fade* ao trocar entre ecrãs).Aplicou o modificador `.animateItem()` para que, quando as imagens carregam ou são atualizadas, elas aparecem na interface de forma dinâmica. O botão de *refresh* foi substituído por um interrutor de **Dark Mode** manual que troca o estado geral da app na hora, e a atualização das imagens é agora controlada por um *Push-to-Refresh*

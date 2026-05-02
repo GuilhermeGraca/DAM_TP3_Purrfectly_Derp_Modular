@@ -29,28 +29,45 @@ val ColorSliderInactive = Color(0xFFDDD2F3)
 val ColorButtonBg = Color(0xFFDB9059)
 val ColorButtonText = Color(0xFF49311C)
 
+// Cores adaptadas para o modo Escuro (mesmo estilo, mas adaptado)
+val DarkBgGradientStart = Color(0xFF2C253B) 
+val DarkBgGradientEnd = Color(0xFF1E1E1E) 
+val DarkColorPrimaryTitle = Color(0xFFE2B692) 
+val DarkColorCardTitle = Color(0xFFEBE5D2) 
+val DarkColorDerpText = Color(0xFFDCC1A7) 
+val DarkColorSliderActive = Color(0xFFBCA6E3)
+val DarkColorSliderInactive = Color(0xFF4A405D)
+val DarkColorButtonBg = Color(0xFFBD6D35)
+val DarkColorButtonText = Color(0xFFFFFFFF)
+
 private val DarkColorScheme = darkColorScheme(
-    primary = ColorPrimaryTitle,
-    secondary = ColorSliderActive,
-    tertiary = ColorButtonBg,
-    background = Color(0xFF1E1E1E),
+    primary = DarkColorPrimaryTitle,
+    secondary = DarkColorSliderActive,
+    tertiary = DarkColorButtonBg,
+    background = DarkBgGradientStart,
+    surfaceVariant = DarkBgGradientEnd,
     surface = Color(0xFF2C2C2C),
     onPrimary = Color.Black,
     onSecondary = Color.Black,
-    onBackground = Color(0xFFE0E0E0),
-    onSurface = Color(0xFFE0E0E0)
+    onTertiary = DarkColorButtonText,
+    onBackground = DarkColorCardTitle,
+    onSurface = DarkColorCardTitle,
+    onSurfaceVariant = DarkColorDerpText
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = ColorPrimaryTitle,
     secondary = ColorSliderActive,
     tertiary = ColorButtonBg,
-    background = BgGradientStart, // Base background, mas usaremos Brush no Compose
+    background = BgGradientStart,
+    surfaceVariant = BgGradientEnd,
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = ColorCardTitle,
+    onTertiary = ColorButtonText,
     onBackground = ColorCardTitle,
-    onSurface = ColorCardTitle
+    onSurface = ColorCardTitle,
+    onSurfaceVariant = ColorDerpText
 )
 
 tailrec fun Context.findActivity(): Activity? = when (this) {
@@ -62,7 +79,7 @@ tailrec fun Context.findActivity(): Activity? = when (this) {
 @Composable
 fun PurrfectlyDerpTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false, // Desativado para prevalecer as nossas cores
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

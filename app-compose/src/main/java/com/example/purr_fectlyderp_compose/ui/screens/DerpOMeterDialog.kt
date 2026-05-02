@@ -22,15 +22,16 @@ fun DerpOMeterDialog(
     onSaveFavorite: (UnsplashImage, Int) -> Unit
 ) {
     var sliderValue by remember { mutableStateOf(50f) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        dragHandle = { BottomSheetDefaults.DragHandle() },
-        modifier = Modifier.fillMaxHeight(0.85f) // Sheet height
+        sheetState = sheetState,
+        dragHandle = { BottomSheetDefaults.DragHandle() }
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -48,7 +49,7 @@ fun DerpOMeterDialog(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .height(250.dp)
                     .clip(RoundedCornerShape(12.dp))
             )
 
@@ -57,6 +58,7 @@ fun DerpOMeterDialog(
             Text(
                 text = image.description ?: "Sem descrição disponível",
                 style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
@@ -66,6 +68,7 @@ fun DerpOMeterDialog(
             Text(
                 text = "Nível de Derp: ${sliderValue.toInt()}%",
                 style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.SemiBold
             )
 
@@ -76,9 +79,9 @@ fun DerpOMeterDialog(
                 steps = 100,
                 modifier = Modifier.padding(vertical = 8.dp),
                 colors = SliderDefaults.colors(
-                    thumbColor = com.example.purr_fectlyderp_compose.ui.theme.ColorSliderActive,
-                    activeTrackColor = com.example.purr_fectlyderp_compose.ui.theme.ColorSliderActive,
-                    inactiveTrackColor = com.example.purr_fectlyderp_compose.ui.theme.ColorSliderInactive
+                    thumbColor = MaterialTheme.colorScheme.secondary,
+                    activeTrackColor = MaterialTheme.colorScheme.secondary,
+                    inactiveTrackColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f)
                 )
             )
 
@@ -91,8 +94,8 @@ fun DerpOMeterDialog(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = com.example.purr_fectlyderp_compose.ui.theme.ColorButtonBg,
-                    contentColor = com.example.purr_fectlyderp_compose.ui.theme.ColorButtonText
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = androidx.compose.ui.graphics.Color.White
                 )
             ) {
                 Text(text = "Adicionar ao Hall of Fame")

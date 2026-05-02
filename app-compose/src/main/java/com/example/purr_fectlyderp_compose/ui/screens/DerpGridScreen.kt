@@ -8,7 +8,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -17,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,7 +34,9 @@ import com.example.purr_fectlyderp_compose.ui.theme.ColorPrimaryTitle
 @Composable
 fun DerpGridScreen(
     viewModel: MainViewModel,
-    onNavigateToFavorites: () -> Unit
+    onNavigateToFavorites: () -> Unit,
+    isDarkTheme: Boolean,
+    onToggleTheme: () -> Unit
 ) {
     val images by viewModel.images.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -40,7 +45,10 @@ fun DerpGridScreen(
     var selectedImage by remember { mutableStateOf<UnsplashImage?>(null) }
 
     val backgroundBrush = Brush.verticalGradient(
-        colors = listOf(BgGradientStart, BgGradientEnd)
+        colors = listOf(
+            MaterialTheme.colorScheme.background, 
+            MaterialTheme.colorScheme.surfaceVariant
+        )
     )
 
     Box(
@@ -59,25 +67,26 @@ fun DerpGridScreen(
             ) {
                 Text(
                     text = "Friendly Purr-fectly\nDerp Gallery",
-                    color = ColorPrimaryTitle,
+                    color = MaterialTheme.colorScheme.primary,
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     lineHeight = 32.sp
                 )
                 
                 Row {
-                    IconButton(onClick = { viewModel.fetchDerpImages() }) {
+                    IconButton(onClick = onToggleTheme) {
                         Icon(
-                            Icons.Default.Refresh, 
-                            contentDescription = "Refresh",
-                            tint = ColorPrimaryTitle
+                            if (isDarkTheme) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                            contentDescription = "Theme Toggle",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(28.dp)
                         )
                     }
                     IconButton(onClick = onNavigateToFavorites) {
                         Icon(
                             Icons.Default.Favorite, 
                             contentDescription = "Hall of fame",
-                            tint = ColorPrimaryTitle,
+                            tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(32.dp)
                         )
                     }
@@ -85,7 +94,11 @@ fun DerpGridScreen(
             }
 
             // Grelha de imagens
-            Box(modifier = Modifier.weight(1f)) {
+            PullToRefreshBox(
+                isRefreshing = isLoading,
+                onRefresh = { viewModel.fetchDerpImages() },
+                modifier = Modifier.weight(1f)
+            ) {
                 if (images.isNotEmpty()) {
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(2),
@@ -95,7 +108,14 @@ fun DerpGridScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(images, key = { it.id }) { image ->
-                            DerpGridItem(image = image) {
+                            DerpGridItem(
+                                image = image,
+                                modifier = Modifier.animateItem(
+                                    fadeInSpec = null,
+                                    fadeOutSpec = null,
+                                    placementSpec = androidx.compose.animation.core.tween(300)
+                                )
+                            ) {
                                 selectedImage = image
                             }
                         }
@@ -108,13 +128,6 @@ fun DerpGridScreen(
                     )
                 }
 
-                if (isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center),
-                        color = ColorPrimaryTitle
-                    )
-                }
-
                 errorMessage?.let { msg ->
                     if (images.isEmpty()) {
                         Column(
@@ -123,7 +136,13 @@ fun DerpGridScreen(
                         ) {
                             Text(text = msg, color = MaterialTheme.colorScheme.error)
                             Spacer(modifier = Modifier.height(8.dp))
-                            Button(onClick = { viewModel.fetchDerpImages() }) {
+                            Button(
+                                onClick = { viewModel.fetchDerpImages() },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.tertiary,
+                                    contentColor = MaterialTheme.colorScheme.onTertiary
+                                )
+                            ) {
                                 Text("Tentar Novamente")
                             }
                         }
@@ -145,9 +164,9 @@ fun DerpGridScreen(
 }
 
 @Composable
-fun DerpGridItem(image: UnsplashImage, onClick: () -> Unit) {
+fun DerpGridItem(image: UnsplashImage, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1f)
             .clickable { onClick() },
