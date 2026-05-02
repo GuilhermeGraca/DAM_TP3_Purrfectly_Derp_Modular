@@ -69,3 +69,23 @@ Podes começar a executar o Passo 4
 
 **Result:**
 A IA converteu o módulo `:app-compose` de Library para Application, adicionou o plugin do Compose Compiler, configurou o BuildFeatures para Compose e adicionou todas as bibliotecas de UI e Material 3 no `build.gradle.kts`. Criou o `AndroidManifest.xml` base para a nova app
+
+## Prompt 5
+
+**Goal:**
+Criar a base do UI Declarativo e preparar os ViewModels no `app-compose`.
+
+**Prompt used**:
+Lê todos os ficheiros Markdown na pasta docs/ para ganhares contexto sobre a arquitetura (MVVM multi-módulo), os modelos de dados e as features exclusivas desta aplicação.
+
+O teu objetivo agora é focar-te no docs/08_implementation_plan.md e implementar exclusivamente o Passo 5.
+
+Regras:
+
+- Não avances para o passo seguinte sem a minha autorização.
+- Se precisares de mover ficheiros entre módulos, certifica-te de que as dependências no build.gradle.kts e os imports ficam corretos.
+
+Podes começar a executar o Passo 5
+
+**Result:**
+A IA criou a `MainActivity` base em Compose e o sistema de "Dynamic Theming" que herda as cores originais da App XML mas agora suporta cores dinâmicas. Foram recriados os `MainViewModel` e `FavoritesViewModel` adaptou a base de dados e a API para usarem `StateFlow`
