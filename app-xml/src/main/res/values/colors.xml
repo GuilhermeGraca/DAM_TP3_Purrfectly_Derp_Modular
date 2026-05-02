@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="bg_gradient_start">#ebe5d2</color>
+    <color name="bg_gradient_end">#d4c8e0</color>
+    
+    <color name="color_primary_title">#d29662</color>
+    <color name="color_card_title">#49311c</color>
+    <color name="color_derp_text">#cc9d75</color>
+    
+    <color name="color_slider_active">#a18bc9</color>
+    <color name="color_slider_inactive">#ddd2f3</color>
+    
+    <color name="color_button_bg">#db9059</color>
+    <color name="color_button_text">#49311c</color>
+</resources>

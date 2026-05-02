@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Purr-fectly Derp Modular</string>
+    <string name="error_loading_images">Houve um erro a carregar imagens</string>
+    <string name="try_again">Tentar Novamente</string>
+    <string name="menu_favorites">Favoritos</string>
+</resources>
